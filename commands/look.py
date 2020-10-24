@@ -7,7 +7,7 @@ def action(game, inputstring):
     if len(args) == 0:
         if game.current_encounter is not None:
             print(f"You are in an encounter!\n"
-                  f"You have {game.player.hp}HP and deal {game.player.damage} damage\n"
+                  f"You have {game.player.hp}HP\n"
                   f"You are fighting against:")
             for enemy in game.current_encounter.enemies:
                 print(f"{enemy.name}, who has {enemy.hp}HP and deals {enemy.damage} damage")

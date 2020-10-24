@@ -1,6 +1,7 @@
 from command import Command, arguments
 from commands.command_return_flag import CommandReturnFlag
 from command_util import *
+import util
 
 
 def action(game, inputstring):
@@ -15,8 +16,14 @@ def action(game, inputstring):
         print(f"Invalid attack target '{args[0]}'!")
         return [CommandReturnFlag.SKIP_EVERYTHING]
 
-    target.hp -= game.player.damage
-    print(f"{game.player.name} attacked {target.name} for {game.player.damage}HP!")
+    dealt_damage = None
+    if game.player.equipped_weapon is None:
+        dealt_damage = util.parse_damage_string(game.player.damage)
+    else:
+        dealt_damage = util.parse_damage_string(game.player.equipped_weapon.damage)
+
+    target.hp -= dealt_damage
+    print(f"{game.player.name} attacked {target.name} for {dealt_damage}HP!")
     if target.hp < 1 and target != game.player:
         game.current_encounter.remove_enemy(target)
         print(f"Enemy {target.name} died!")

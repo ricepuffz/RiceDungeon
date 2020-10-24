@@ -4,6 +4,8 @@ from commands.quit import Quit
 from commands.check import Check
 from commands.look import Look
 from commands.help import Help
+from commands.inventory import Inventory
+from commands.equip import Equip
 
 
 class CommandRegistry:
@@ -30,5 +32,7 @@ class CommandRegistry:
         self.register_command(Check())
         self.register_command(Look())
         self.register_command(Help())
+        self.register_command(Inventory())
+        self.register_command(Equip())
 
         self.commands.sort(key=lambda command: command.inputstring)

@@ -2,6 +2,7 @@ from player import Player
 from enemy import Enemy
 from encounter import Encounter
 from command_registry import CommandRegistry
+from item_registry import ItemRegistry
 from commands.command_return_flag import CommandReturnFlag
 
 
@@ -13,14 +14,21 @@ class Game:
     command_return_flags = []
     gamerunning = True
     command_registry = None
+    item_registry = None
     player = None
     current_encounter = None
 
     def __init__(self):
         self.command_registry = CommandRegistry(self)
+        self.item_registry = ItemRegistry(self)
+
         self.player = Player("AAAAA")
+        self.player.inventory.add_item(self.item_registry.get_item("Crude Bronze Shortsword"))
+
         enemy = Enemy("Dummy")
+
         self.current_encounter = Encounter(enemy)
+
         self.gameloop()
 
     def gameloop(self):
